@@ -25,19 +25,19 @@ html
     div(class='container')
       div(class='row mb-5')
         div(class='col') 
-          h2 Converison 1
+          h2 Conversion 1
         div(class='col-6')
         div(class='col') 
           h2 Conversion 2
       div(class='row')
         div(class='col')
           div(class='list-group')
-            a(href='#' class='list-group-item list-group-item-action list-group-item-light') Showering
-            a(href='#' class='list-group-item list-group-item-action list-group-item-light') Cycling
+            a(href='#' id='shower-btn' class='list-group-item list-group-item-action list-group-item-light') Showering
+            a(href='#' id='cycling-btn' class='list-group-item list-group-item-action list-group-item-light') Cycling
         div(class='col-6') 
         div(class='col') 
-          a(href='#' class='list-group-item list-group-item-action list-group-item-light') Refrigerator
-          a(href='#' class='list-group-item list-group-item-action list-group-item-light') Laptop
+          a(href='#' id='refrigerator-btn' class='list-group-item list-group-item-action list-group-item-light') Refrigerator
+          a(href='#' id='laptop-btn' class='list-group-item list-group-item-action list-group-item-light') Laptop
     
     .container-fluid.left-align
       .row
@@ -87,3 +87,55 @@ html
           $('#input6').val(result);
         });
       });
+
+    script.
+      $(document).ready(function() {
+        const showerBtn = document.getElementById("shower-btn");
+        const input1 = document.getElementById("#input1");
+        showerBtn.addEventListener("click", () => {
+          $('#input1').val(10);
+          var input1 = parseInt($('#input1').val()) || 0;
+          var input2 = parseInt($('#input2').val()) || 0;
+          var result = input1 * input2;
+          $('#input3').val(result);
+        });
+      });  
+
+    script.
+      $(document).ready(function() {
+        const showerBtn = document.getElementById("cycling-btn");
+        const input1 = document.getElementById("#input1");
+        showerBtn.addEventListener("click", () => {
+          $('#input1').val(20);
+          var input1 = parseInt($('#input1').val()) || 0;
+          var input2 = parseInt($('#input2').val()) || 0;
+          var result = input1 * input2;
+          $('#input3').val(result);
+        });
+      });  
+
+    script.
+      $(document).ready(function() {
+        const showerBtn = document.getElementById("refrigerator-btn");
+        const input1 = document.getElementById("#input4");
+        showerBtn.addEventListener("click", () => {
+          $('#input4').val(40);
+          var input1 = parseInt($('#input4').val()) || 0;
+          var input2 = parseInt($('#input5').val()) || 0;
+          var result = input1 * input2;
+          $('#input6').val(result);
+        });
+      });  
+
+    script.
+      $(document).ready(function() {
+        const showerBtn = document.getElementById("laptop-btn");
+        const input1 = document.getElementById("#input4");
+        showerBtn.addEventListener("click", () => {
+          $('#input4').val(60);
+          var input1 = parseInt($('#input4').val()) || 0;
+          var input2 = parseInt($('#input5').val()) || 0;
+          var result = input1 * input2;
+          $('#input6').val(result);
+        });
+      });  
