@@ -7,5 +7,5 @@ Web app for Energy Conversion
 
 ## How to run application
 
-* `nodemon index.j`
+* `nodemon index.js`
 * Open localhost:3000
