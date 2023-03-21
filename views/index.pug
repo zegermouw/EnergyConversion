@@ -24,12 +24,24 @@ html
               a(class='nav-link active' aria-current='page' href='#') About Us
     
     main
-      form(action='#' method='POST')
-        input(type='text' placeholder='Enter the amount')
-        input(type='text' placeholder='Enter the unit of measurement')
-        button(type='submit') Submit
-        input(type='text' placeholder='Desired unit of measurement')
-      
+      form(action='/submit-form', method='POST')
+        div(class='row mb-20')
+          div(class='col')
+            div(class='row')
+              label(for='name') Amount:
+              input(type='text', name='name', id='name')
+            div(class='row')
+              label(for='email') Energy Type:
+              input(type='email', name='email', id='email')
+        
+          div(class='col')
+            div(class='row')
+              label(for='message') Required energy type:
+              input(type='text', name='message', id='message')
+            div(class='row')
+              button(type='submit') Convert 
+           
+          
 
     // CSS
     style.
@@ -44,6 +56,7 @@ html
       form {
         margin-top: 100px;
       }
+      
 
 
     script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js")
