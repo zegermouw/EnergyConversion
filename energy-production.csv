@@ -1,0 +1,9 @@
+id, name, kWh
+1, nuclear-power-NL-2022, 3930000000
+2, coal-power-NL-2022, 16482000000
+3, oil-products-power-NL-2022, 1558000000
+4, gas-power-NL-2022, 46880000000
+5, biomass-power-NL-2022, 8563000000
+6, water-power-NL-2022, 50000000
+7, wind-power-NL-2022, 21152000000
+8, solar-power-NL-2022, 17675000000
