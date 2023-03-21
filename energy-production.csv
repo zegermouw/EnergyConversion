@@ -7,3 +7,9 @@ id, name, kWh
 6, water-power-NL-2022, 50000000
 7, wind-power-NL-2022, 21152000000
 8, solar-power-NL-2022, 17675000000
+9, total-energy-production-FR-2021, 554727756000000
+10, total-energy-production-IT-2021, 288490682000000
+11, total-energy-production-ES-2021, 274032000000000
+12, total-energy-production-SE-2021, 171798000000000
+13, total-energy-production-BE-2021, 99968800000000
+14, total-energy-production-RO-2021, 59470264000000
