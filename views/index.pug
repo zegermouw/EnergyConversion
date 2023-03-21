@@ -27,20 +27,22 @@ html
       div.container
         form(action='/submit-form', method='POST')
           div.row(style='display: flex; justify-content: space-between;')
-            div.col#leftSide
-              input(type='text', name='amount', id='amount', placeholder="Enter the amount")
-            div.col#leftMiddleSide
-              select(name='energyType', id='energyType' style='width: 150px;')
-                option(value='option1') kWh
-                option(value='option2') J
-            div.col
+            div.row#left
+              div.col#choice
+                input(type='text', name='amount', id='amount', placeholder="Enter the amount")
+              div.col#choice
+                select(name='energyType', id='energyType' style='width: 150px;')
+                  option(value='option1') kWh
+                  option(value='option2') J
+            div.col(style='display: flex; justify-content: center; align-items: center;')
               p Convert to:
-            div.col#rightMiddleSide
-              select(name='energyTypeReq', id='energyTypeReq' style='width: 150px;')
-                option(value='option1') kWh
-                option(value='option2') J
-            div.col#rightSide
-              button(type='submit') Convert
+            div.row#right
+              div.col#choice
+                select(name='energyTypeReq', id='energyTypeReq' style='width: 150px;')
+                  option(value='option1') kWh
+                  option(value='option2') J
+              div.col#choice
+                button#button(type='submit') Convert
           
             
 
@@ -56,7 +58,35 @@ html
         }
 
         form {
-          width: 120%;
+          width: 100%;
         }
 
-      
+        #left {
+          background-color: green;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 25px;
+          border: 2px solid #73AD21;
+          width: 500px;
+        }
+
+        #right {
+          background-color: green;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 25px;
+          border: 2px solid #73AD21;
+          width: 500px;
+        }
+
+        #choice {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        #button {
+          width: 150px;
+        }
