@@ -22,120 +22,30 @@ html
               a(class='nav-link active' aria-current='page' href='#') Info
             li(class='nav-item')
               a(class='nav-link active' aria-current='page' href='#') About Us
-    div(class='container')
-      div(class='row mb-5')
-        div(class='col') 
-          h2 Conversion 1
-        div(class='col-6')
-        div(class='col') 
-          h2 Conversion 2
-      div(class='row')
-        div(class='col')
-          div(class='list-group')
-            a(href='#' id='shower-btn' class='list-group-item list-group-item-action list-group-item-light') Showering
-            a(href='#' id='cycling-btn' class='list-group-item list-group-item-action list-group-item-light') Cycling
-        div(class='col-6') 
-        div(class='col') 
-          a(href='#' id='refrigerator-btn' class='list-group-item list-group-item-action list-group-item-light') Refrigerator
-          a(href='#' id='laptop-btn' class='list-group-item list-group-item-action list-group-item-light') Laptop
     
-    .container-fluid.left-align
-      .row
-        .col-md-6
-          .row
-            .col-md-4
-              h3 Power P
-              input.form-control(type="number", id='input1', placeholder="Enter a number")
-            .col-md-4
-              h3 Time t
-              input.form-control(type="number", id='input2', placeholder="Enter a number")
-            .col-md-4
-              h3 Co2 
-              input.form-control(type="number", id='input3', placeholder="Enter a number")
-        .col-md-6
-          .row
-            .col-md-4
-              h3 Power P Right
-              input.form-control(type="number", id='input4', placeholder="Enter a number")
-            .col-md-4
-              h3 Time t
-              input.form-control(type="number", id='input5', placeholder="Enter a number")
-            .col-md-4
-              h3 Co2 
-              input.form-control(type="number", id='input6', placeholder="Enter a number")
+    main
+      form(action='#' method='POST')
+        input(type='text' placeholder='Enter the amount')
+        input(type='text' placeholder='Enter the unit of measurement')
+        button(type='submit') Submit
+        input(type='text' placeholder='Desired unit of measurement')
+      
+
+    // CSS
+    style.
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      form {
+        margin-top: 100px;
+      }
 
 
     script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js")
-    script.
-      $(document).ready(function() {
-        $('#input1, #input2').on('input', function() {
-          var input1 = parseInt($('#input1').val()) || 0;
-          var input2 = parseInt($('#input2').val()) || 0;
-          var result = input1 * input2;
-          $('#input3').val(result);
-        });
-      });
-
-    script.
-      $(document).ready(function() {
-        $('#input4, #input5').on('input', function() {
-          var input4 = parseInt($('#input4').val()) || 0;
-          var input5 = parseInt($('#input5').val()) || 0;
-          var result = input4 * input5;
-          $('#input6').val(result);
-        });
-      });
-
-    script.
-      $(document).ready(function() {
-        const showerBtn = document.getElementById("shower-btn");
-        const input1 = document.getElementById("#input1");
-        showerBtn.addEventListener("click", () => {
-          $('#input1').val(10);
-          var input1 = parseInt($('#input1').val()) || 0;
-          var input2 = parseInt($('#input2').val()) || 0;
-          var result = input1 * input2;
-          $('#input3').val(result);
-        });
-      });  
-
-    script.
-      $(document).ready(function() {
-        const showerBtn = document.getElementById("cycling-btn");
-        const input1 = document.getElementById("#input1");
-        showerBtn.addEventListener("click", () => {
-          $('#input1').val(20);
-          var input1 = parseInt($('#input1').val()) || 0;
-          var input2 = parseInt($('#input2').val()) || 0;
-          var result = input1 * input2;
-          $('#input3').val(result);
-        });
-      });  
-
-    script.
-      $(document).ready(function() {
-        const showerBtn = document.getElementById("refrigerator-btn");
-        const input1 = document.getElementById("#input4");
-        showerBtn.addEventListener("click", () => {
-          $('#input4').val(40);
-          var input1 = parseInt($('#input4').val()) || 0;
-          var input2 = parseInt($('#input5').val()) || 0;
-          var result = input1 * input2;
-          $('#input6').val(result);
-        });
-      });  
-
-    script.
-      $(document).ready(function() {
-        const showerBtn = document.getElementById("laptop-btn");
-        const input1 = document.getElementById("#input4");
-        showerBtn.addEventListener("click", () => {
-          $('#input4').val(60);
-          var input1 = parseInt($('#input4').val()) || 0;
-          var input2 = parseInt($('#input5').val()) || 0;
-          var result = input1 * input2;
-          $('#input6').val(result);
-        });
-      });  
