@@ -26,7 +26,6 @@ app.get('/', (req, res) => {
 })
 app.post('/submit-form', (req, res) => {
   var body = req.body;
-  console.log(body)
   var amount = req.body.amount;
   var energyType = req.body.energyType
   var energyTypeReq = req.body.energyTypeReq
@@ -36,9 +35,7 @@ app.get('/results/:amount/:energyType/:energyTypeReq', (req, res) => {
   function calulateTo(amount, energyType, energyTypeReq) {
     var indexes = {"Joules": 0, "KWh": 1}
     var energyTypeIndex = indexes[energyType]
-    console.log(energyTypeIndex)
     var energyTypeReqIndex = indexes[energyTypeReq]
-    console.log(energyTypeReqIndex)
     var convArr = 
     [[1,3.6e6],
      [2.77e-7,1]]
@@ -50,7 +47,7 @@ app.get('/results/:amount/:energyType/:energyTypeReq', (req, res) => {
   var energyType = req.params.energyType
   var energyTypeReq = req.params.energyTypeReq
   var val = calulateTo(amount, energyType, energyTypeReq)
-  const testdata = {'number': (amount* val).toFixed(), 'var': energyTypeReq}
+  const testdata = {'number': (amount* val), 'var': energyTypeReq}
   res.render('results', {results: testdata})
 })
 
