@@ -31,15 +31,11 @@ app.post('/submit-form', (req, res) => {
   var energyTypeReq = req.body.energyTypeReq
   res.redirect(`/results/${amount}/${energyType}/${energyTypeReq}`)  
 })
+
 app.get('/results/:amount/:energyType/:energyTypeReq', (req, res) => {
   function calulateTo(amount, energyType, energyTypeReq) {
-    var indexes = {"Joules": 0, "KWh": 1}
-    var energyTypeIndex = indexes[energyType]
-    var energyTypeReqIndex = indexes[energyTypeReq]
-    var convArr = 
-    [[1,3.6e6],
-     [2.77e-7,1]]
-    var val = convArr[energyTypeReqIndex][energyTypeIndex]
+    var convArr = {"Joules": 1, "KWh": 3.6e6, 'Barrels of Oil': 6383087908.4, 'Calories': 4.18, "Kg of Uranium": 3.9e12, "Kg of Coal": 2.4e7, "Kg of Firewood": 1.6e7}
+    var val = amount * convArr[energyType] / convArr[energyTypeReq]
     return val
   }
 
@@ -47,7 +43,7 @@ app.get('/results/:amount/:energyType/:energyTypeReq', (req, res) => {
   var energyType = req.params.energyType
   var energyTypeReq = req.params.energyTypeReq
   var val = calulateTo(amount, energyType, energyTypeReq)
-  const testdata = {'number': (amount* val), 'var': energyTypeReq}
+  const testdata = {'number': val, 'var': energyTypeReq}
   res.render('results', {results: testdata})
 })
 
