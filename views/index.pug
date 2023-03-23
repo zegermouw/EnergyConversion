@@ -7,22 +7,22 @@ html
     link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css")
     title= title
   body
-    nav(class='navbar navbar-expand-lg navbar-light bg-light')
+    nav(class='navbar navbar-expand-lg navbar-dark bg-dark')
       div(class='container-fluid')
         a(class='navbar-brand' href='/home') 
-          img(src='/images/icon.png', width=30, height=30, class='d-inline-block align-text-top mr-2') 
+          img(src='/images/EnergyConversion.png', width=40, height=50, class='d-inline-block align-text-top mr-2') 
           span EnergyConversion
         button(class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
           span(class='navbar-toggler-icon')
         div(class='collapse navbar-collapse' id='navbarSupportedContent')
-          ul(class='navbar-nav me-auto mb-2 mb-lg-0')
+          ul(class='navbar-nav ml-auto')
             li(class='nav-item')
               a(class='nav-link active' aria-current='page' href='#') Convert
             li(class='nav-item')
               a(class='nav-link active' aria-current='page' href='#') Info
             li(class='nav-item')
               a(class='nav-link active' aria-current='page' href='#') About Us
-    div(class='container')
+    div(class='container mt-5')
       div(class='row mb-5')
         div(class='col') 
           h2 Conversion 1
@@ -32,37 +32,51 @@ html
       div(class='row')
         div(class='col')
           div(class='list-group')
-            a(href='#' id='shower-btn' class='list-group-item list-group-item-action list-group-item-light') Showering
-            a(href='#' id='cycling-btn' class='list-group-item list-group-item-action list-group-item-light') Cycling
+            each n in data
+                a(href='#' id=(n.name + '-left-btn') value=n class='list-group-item list-group-item-action d-flex justify-content-between left_group')
+                  div(class="d-flex w-100 justify-content-between")
+                    h5=n.name
+
         div(class='col-6') 
+          div(class='row')
+            div(class='col')
+              span(id='selectLeft') 
+              button(class="btn btn-lg btn-danger" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?")="i"
+
+            div(class='col')
+              span(id='selectRight') 
         div(class='col') 
-          a(href='#' id='refrigerator-btn' class='list-group-item list-group-item-action list-group-item-light') Refrigerator
-          a(href='#' id='laptop-btn' class='list-group-item list-group-item-action list-group-item-light') Laptop
-    
-    .container-fluid.left-align
+          each n in data
+            a(href='#' id=(n.name + '-right-btn') value=n class='list-group-item list-group-item-action right_group')= n.name 
+
+    .container-fluid.left-align(class="mt-5")
       .row
         .col-md-6
           .row
             .col-md-4
-              h3 Power P
-              input.form-control(type="number", id='input1', placeholder="Enter a number")
+              h3 Power (Watt)
+              input.form-control(type="number", id='input1', disabled="True", placeholder="Select a source")
             .col-md-4
-              h3 Time t
+              h3 Time (Minutes)
               input.form-control(type="number", id='input2', placeholder="Enter a number")
             .col-md-4
-              h3 Co2 
+              h3 Co2 (m3)
               input.form-control(type="number", id='input3', placeholder="Enter a number")
         .col-md-6
           .row
             .col-md-4
-              h3 Power P Right
-              input.form-control(type="number", id='input4', placeholder="Enter a number")
+              h3 Power (Watt)
+              input.form-control(type="number", id='input4', disabled="True", placeholder="Select a source")
             .col-md-4
-              h3 Time t
+              h3 Time (Minutes)
               input.form-control(type="number", id='input5', placeholder="Enter a number")
             .col-md-4
-              h3 Co2 
+              h3 Co2 (m3) 
               input.form-control(type="number", id='input6', placeholder="Enter a number")
+    .container-fluid(class="mt-5")
+      .row
+        .col
+          h3(id="sentence") Select energy converters
 
 
     script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js")
@@ -70,72 +84,74 @@ html
     script(src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js")
     script.
       $(document).ready(function() {
-        $('#input1, #input2').on('input', function() {
-          var input1 = parseInt($('#input1').val()) || 0;
-          var input2 = parseInt($('#input2').val()) || 0;
-          var result = input1 * input2;
-          $('#input3').val(result);
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+        
+        function calculate1() {
+          var time1 = $('#input2').val();
+          var watt1 = $('#input1').val();
+          var co21 = time1 * watt1;
+          var watt2 = $('#input4').val();
+          var time2 = watt1 / watt2 * time1
+          var co22 = watt2 * time2
+          $('#input5').val(time2)
+          $('#input6').val(co22)
+          $('#input3').val(co21);
+          redoSentence()
+        }
+        
+        function calculate2() {
+          var time2 = $('#input5').val();
+          var watt2 = $('#input4').val();
+          var co22 = time2 * watt2;
+          var watt1 = $('#input1').val();
+          var time1 = watt2 / watt1 * time2
+          var co21 = watt1 * time1
+          $('#input2').val(time1)
+          $('#input3').val(co21)
+          $('#input6').val(co22);
+          redoSentence()
+        }
+        function redoSentence() {
+          var left = $('#selectLeft').text()
+          var left_time = $('#input2').val()
+          var right = $('#selectRight').text()
+          var right_time = $('#input5').val()
+          $('#sentence').text(left_time + " minutes of " + left + " is equal to " +  right_time + " minutes of " + right)
+        }
+        function calculate_from_co2_1() {
+          var co2_1 = $('#input3').val()
+          var watt1 = $('#input1').val()
+          console.log(co2_1)
+          console.log(watt1)
+          var minutes1 = co2_1 / watt1 
+          console.log(minutes1)
+          $('#input2').val(minutes1)
+          calculate1()
+        }
+        $('.right_group').click(function(){ 
+          var json = JSON.parse($(this).attr('value'));
+          $('#input4').val(json.watt);
+          $('#selectRight').text(json.name)
+          $('.right_group').removeClass('active')
+          $('#' + json.name + '-right-btn').addClass('active')
+          calculate2()
         });
+        $('.left_group').click(function(){ 
+          var json = JSON.parse($(this).attr('value'));
+          $('#input1').val(json.watt);
+          $('#selectLeft').text(json.name)
+          $('.left_group').removeClass('active')
+          $('#' + json.name + '-left-btn').addClass('active')
+          calculate1()
+        });
+        $('#input2').on("input", function(e) {
+          calculate1()
+        })
+        $('#input5').on("input", function(e) {
+          calculate2()
+        })
+        $('#input3').on("input", function(e) {
+          calculate_from_co2_1()
+        })
       });
-
-    script.
-      $(document).ready(function() {
-        $('#input4, #input5').on('input', function() {
-          var input4 = parseInt($('#input4').val()) || 0;
-          var input5 = parseInt($('#input5').val()) || 0;
-          var result = input4 * input5;
-          $('#input6').val(result);
-        });
-      });
-
-    script.
-      $(document).ready(function() {
-        const showerBtn = document.getElementById("shower-btn");
-        const input1 = document.getElementById("#input1");
-        showerBtn.addEventListener("click", () => {
-          $('#input1').val(10);
-          var input1 = parseInt($('#input1').val()) || 0;
-          var input2 = parseInt($('#input2').val()) || 0;
-          var result = input1 * input2;
-          $('#input3').val(result);
-        });
-      });  
-
-    script.
-      $(document).ready(function() {
-        const showerBtn = document.getElementById("cycling-btn");
-        const input1 = document.getElementById("#input1");
-        showerBtn.addEventListener("click", () => {
-          $('#input1').val(20);
-          var input1 = parseInt($('#input1').val()) || 0;
-          var input2 = parseInt($('#input2').val()) || 0;
-          var result = input1 * input2;
-          $('#input3').val(result);
-        });
-      });  
-
-    script.
-      $(document).ready(function() {
-        const showerBtn = document.getElementById("refrigerator-btn");
-        const input1 = document.getElementById("#input4");
-        showerBtn.addEventListener("click", () => {
-          $('#input4').val(40);
-          var input1 = parseInt($('#input4').val()) || 0;
-          var input2 = parseInt($('#input5').val()) || 0;
-          var result = input1 * input2;
-          $('#input6').val(result);
-        });
-      });  
-
-    script.
-      $(document).ready(function() {
-        const showerBtn = document.getElementById("laptop-btn");
-        const input1 = document.getElementById("#input4");
-        showerBtn.addEventListener("click", () => {
-          $('#input4').val(60);
-          var input1 = parseInt($('#input4').val()) || 0;
-          var input2 = parseInt($('#input5').val()) || 0;
-          var result = input1 * input2;
-          $('#input6').val(result);
-        });
-      });  
