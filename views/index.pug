@@ -22,136 +22,70 @@ html
               a(class='nav-link active' aria-current='page' href='#') Info
             li(class='nav-item')
               a(class='nav-link active' aria-current='page' href='#') About Us
-    div(class='container mt-5')
-      div(class='row mb-5')
-        div(class='col') 
-          h2 Conversion 1
-        div(class='col-6')
-        div(class='col') 
-          h2 Conversion 2
-      div(class='row')
-        div(class='col')
-          div(class='list-group')
-            each n in data
-                a(href='#' id=(n.name + '-left-btn') value=n class='list-group-item list-group-item-action d-flex justify-content-between left_group')
-                  div(class="d-flex w-100 justify-content-between")
-                    h5=n.name
-
-        div(class='col-6') 
-          div(class='row')
-            div(class='col')
-              span(id='selectLeft') 
-              button(class="btn btn-lg btn-danger" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?")="i"
-
-            div(class='col')
-              span(id='selectRight') 
-        div(class='col') 
-          each n in data
-            a(href='#' id=(n.name + '-right-btn') value=n class='list-group-item list-group-item-action right_group')= n.name 
-
-    .container-fluid.left-align(class="mt-5")
-      .row
-        .col-md-6
-          .row
-            .col-md-4
-              h3 Power (Watt)
-              input.form-control(type="number", id='input1', disabled="True", placeholder="Select a source")
-            .col-md-4
-              h3 Time (Minutes)
-              input.form-control(type="number", id='input2', placeholder="Enter a number")
-            .col-md-4
-              h3 Co2 (m3)
-              input.form-control(type="number", id='input3', placeholder="Enter a number")
-        .col-md-6
-          .row
-            .col-md-4
-              h3 Power (Watt)
-              input.form-control(type="number", id='input4', disabled="True", placeholder="Select a source")
-            .col-md-4
-              h3 Time (Minutes)
-              input.form-control(type="number", id='input5', placeholder="Enter a number")
-            .col-md-4
-              h3 Co2 (m3) 
-              input.form-control(type="number", id='input6', placeholder="Enter a number")
-    .container-fluid(class="mt-5")
-      .row
-        .col
-          h3(id="sentence") Select energy converters
+    main
+      div.container
+        form(action='/submit-form', method='POST')
+          div.row(style='display: flex; justify-content: space-between;')
+            div.row#left
+              div.col#choice
+                input(type='text', name='amount', id='amount', placeholder="Enter the amount")
+              div.col#choice
+                select(name='energyType', id='energyType' style='width: 150px;')
+                  option(value='KWh') kWh
+                  option(value='Joules') J
+            div.col(style='display: flex; justify-content: center; align-items: center;')
+              p Convert to:
+            div.row#right
+              div.col#choice
+                select(name='energyTypeReq', id='energyTypeReq' style='width: 150px;')
+                  option(value='KWh') kWh
+                  option(value='Joules') J
+              div.col#choice
+                button#button(type='submit') Convert
+          
+            
 
 
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js")
-    script.
-      $(document).ready(function() {
-        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
-        
-        function calculate1() {
-          var time1 = $('#input2').val();
-          var watt1 = $('#input1').val();
-          var co21 = time1 * watt1;
-          var watt2 = $('#input4').val();
-          var time2 = watt1 / watt2 * time1
-          var co22 = watt2 * time2
-          $('#input5').val(time2)
-          $('#input6').val(co22)
-          $('#input3').val(co21);
-          redoSentence()
+      // CSS
+      style.
+        .container {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 40vh;
         }
-        
-        function calculate2() {
-          var time2 = $('#input5').val();
-          var watt2 = $('#input4').val();
-          var co22 = time2 * watt2;
-          var watt1 = $('#input1').val();
-          var time1 = watt2 / watt1 * time2
-          var co21 = watt1 * time1
-          $('#input2').val(time1)
-          $('#input3').val(co21)
-          $('#input6').val(co22);
-          redoSentence()
+
+        form {
+          width: 100%;
         }
-        function redoSentence() {
-          var left = $('#selectLeft').text()
-          var left_time = $('#input2').val()
-          var right = $('#selectRight').text()
-          var right_time = $('#input5').val()
-          $('#sentence').text(left_time + " minutes of " + left + " is equal to " +  right_time + " minutes of " + right)
+
+        #left {
+          background-color: green;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 25px;
+          border: 2px solid #73AD21;
+          width: 500px;
         }
-        function calculate_from_co2_1() {
-          var co2_1 = $('#input3').val()
-          var watt1 = $('#input1').val()
-          console.log(co2_1)
-          console.log(watt1)
-          var minutes1 = co2_1 / watt1 
-          console.log(minutes1)
-          $('#input2').val(minutes1)
-          calculate1()
+
+        #right {
+          background-color: green;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 25px;
+          border: 2px solid #73AD21;
+          width: 500px;
         }
-        $('.right_group').click(function(){ 
-          var json = JSON.parse($(this).attr('value'));
-          $('#input4').val(json.watt);
-          $('#selectRight').text(json.name)
-          $('.right_group').removeClass('active')
-          $('#' + json.name + '-right-btn').addClass('active')
-          calculate2()
-        });
-        $('.left_group').click(function(){ 
-          var json = JSON.parse($(this).attr('value'));
-          $('#input1').val(json.watt);
-          $('#selectLeft').text(json.name)
-          $('.left_group').removeClass('active')
-          $('#' + json.name + '-left-btn').addClass('active')
-          calculate1()
-        });
-        $('#input2').on("input", function(e) {
-          calculate1()
-        })
-        $('#input5').on("input", function(e) {
-          calculate2()
-        })
-        $('#input3').on("input", function(e) {
-          calculate_from_co2_1()
-        })
-      });
+
+        #choice {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        #button {
+          width: 150px;
+        }
