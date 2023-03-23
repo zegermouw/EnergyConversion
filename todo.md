@@ -15,3 +15,8 @@ Carbon emission offset
 Terms of money (savings)
 
 Energy types / emissions
+
+
+Sources for energy conversion:
+https://www.unitconverters.net/energy-converter.html
+https://world-nuclear.org/information-library/facts-and-figures/heat-values-of-various-fuels.aspx

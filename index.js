@@ -33,11 +33,11 @@ app.post('/submit-form', (req, res) => {
 })
 app.get('/results/:amount/:energyType/:energyTypeReq', (req, res) => {
   function calulateTo(amount, energyType, energyTypeReq) {
-    var indexes = {"Joules": 0, "KWh": 1}
+    var indexes = {"Joules": 0, "KWh": 1, 'BarrelsOil': 2, 'calorie': 3, "Uranium": 4, "Coal": 5, "Firewood": 6}
     var energyTypeIndex = indexes[energyType]
     var energyTypeReqIndex = indexes[energyTypeReq]
     var convArr = 
-    [[1,3.6e6],
+    [[1,3.6e6, 6383087908.4,4.18, 3.9e12, 2.4e7, 1.6e7],
      [2.77e-7,1]]
     var val = convArr[energyTypeReqIndex][energyTypeIndex]
     return val
