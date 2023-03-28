@@ -9,36 +9,52 @@ html
   body(style="background-color: #56cc7d")
     include navbar.pug
     main
-      div.container
-        form(action='/submit-form', method='POST')
-          div.row(style='display: flex; justify-content: space-between;')
-            div.row#left
-              div.col#choice
-                input(class="form-control" type='text', name='amount', id='amount', placeholder="Enter the amount")
-              div.col#choice
-                select(class="custom-select" name='energyType', id='energyType' style='width: 150px;')
-                  option(value='KWh') kWh
-                  option(value='Joules') Joules
-                  option(value='Barrels of Oil') Barrels of Oil
-                  option(value='Calories') Calories
-                  option(value='Kg of Uranium') Kg of Uranium 
-                  option(value='Kg of Coal') Kg of Coal 
-                  option(value='Kg of Firewood') Kg of firewood
-            div.col(style='display: flex; justify-content: center; align-items: center;')
-              p Convert to:
-            div.row#right
-              div.col#choice
-                select(class="custom-select" name='energyTypeReq', id='energyTypeReq' style='width: 150px;')
-                  option(value='KWh') kWh
-                  option(value='Joules') Joules
-                  option(value='Barrels of Oil') Barrels of Oil
-                  option(value='Calories') Calories
-                  option(value='Kg of Uranium') Kg of Uranium 
-                  option(value='Kg of Coal') Kg of Coal 
-                  option(value='Kg of Firewood') Kg of firewood
-              div.col#choice
-                button#button(class="btn btn-info mt-2 mb-2" type='submit') Convert
-          
+      .row 
+        div.container
+          form(action='/submit-form', method='POST')
+            div.row(style='display: flex; justify-content: space-between;')
+              div.row#left
+                div.col#choice
+                  input(class="form-control" type='text', name='amount', id='amount', placeholder="Enter the amount")
+                div.col#choice
+                  select(class="custom-select" name='energyType', id='energyType' style='width: 150px;')
+                    option(value='KWh') kWh
+                    option(value='Joules') Joules
+                    option(value='Barrels of Oil') Barrels of Oil
+                    option(value='Calories') Calories
+                    option(value='Kg of Uranium') Kg of Uranium 
+                    option(value='Kg of Coal') Kg of Coal 
+                    option(value='Kg of Firewood') Kg of firewood
+              div.col(style='display: flex; justify-content: center; align-items: center;')
+                p Convert to:
+              div.row#right
+                div.col#choice
+                  select(class="custom-select" name='energyTypeReq', id='energyTypeReq' style='width: 150px;')
+                    option(value='KWh') kWh
+                    option(value='Joules') Joules
+                    option(value='Barrels of Oil') Barrels of Oil
+                    option(value='Calories') Calories
+                    option(value='Kg of Uranium') Kg of Uranium 
+                    option(value='Kg of Coal') Kg of Coal 
+                    option(value='Kg of Firewood') Kg of firewood
+                div.col#choice
+                  button#button(class="btn btn-info mt-2 mb-2" type='submit') Convert
+      div(class='row')
+          div(class='col justify-content-center text-center')
+              h1(style="")="The results are:  " +  + " "
+              a(href="/" class="btn btn-info text-white mb-4 mt-1")="Convert again"
+              h4="For this energy, you could have done:"
+      div(class="row")
+          div(class='col justify-content-center text-center mb-5')
+              div(class='card' style='width: 350px; border-radius: 25px; border: 2px solid white; background-color: #327849')
+                  div(class='card-body')
+                      i(class="fa fa-car float-right text-white")
+                      h5(class='card-title text-white')="20 minutes of microwave"
+                      h6(class='card-subtitle text-white')="At 700 watts"    
+                      p(class='card-text text-white')="Some information about a microwave"
+                      
+                    
+                            
             
 
 
